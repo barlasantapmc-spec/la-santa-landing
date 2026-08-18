@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Santa · Bar — Reservas, Santos Palitos Libres y Cumpleaños</title>
+<meta name="description" content="La Santa: bar, cocina y buena noche. Reserva tu mesa, vive el buffet Santos Palitos Libres y celebra tu cumpleaños con beneficios exclusivos.">
+<meta name="theme-color" content="#0B0A09">
+
+<!-- Open Graph / redes
+     ⚠️ Cuando el sitio tenga su dirección definitiva, reemplaza TU-DOMINIO.cl
+     en og:url y og:image por la real. Las vistas previas de WhatsApp e
+     Instagram NO funcionan con rutas relativas: necesitan la URL completa. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="La Santa">
+<meta property="og:title" content="La Santa · Bar & Cook — Puerto Montt">
+<meta property="og:description" content="Coctelería de autor, sushi libre y beneficios de cumpleaños. Reserva tu mesa online en menos de un minuto.">
+<meta property="og:url" content="https://TU-DOMINIO.cl/">
+<meta property="og:image" content="https://TU-DOMINIO.cl/assets/img/og-lasanta.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_CL">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="La Santa · Bar & Cook — Puerto Montt">
+<meta name="twitter:description" content="Coctelería de autor, sushi libre y beneficios de cumpleaños. Reserva tu mesa online.">
+<meta name="twitter:image" content="https://TU-DOMINIO.cl/assets/img/og-lasanta.jpg">
+
+<link rel="icon" href="assets/img/logo-la-santa.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+<a class="skip-link" href="#reservar">Saltar a reservas</a>
+
+<!-- ══════════════════════ NAV ══════════════════════ -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="#inicio" aria-label="La Santa — inicio">
+      <img src="assets/img/logo-la-santa.png" alt="La Santa" class="nav__logo">
+    </a>
+
+    <nav class="nav__links" aria-label="Navegación principal">
+      <a href="#carta">Carta</a>
+      <a href="#palitos">Sushi Libre</a>
+      <a href="#cumples">Cumpleaños</a>
+      <a href="#instagram">Instagram</a>
+      <a href="#lugar">El lugar</a>
+      <a href="#visitanos">Visítanos</a>
+    </nav>
+
+    <a href="#reservar" class="btn btn--gold btn--sm nav__cta">Reservar</a>
+
+    <button class="nav__burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav__mobile" id="mobileMenu" hidden>
+    <a href="#carta">La carta</a>
+    <a href="#palitos">Santos Palitos Libres</a>
+    <a href="#cumples">Cumpleaños</a>
+    <a href="#instagram">Instagram</a>
+    <a href="#lugar">El lugar</a>
+    <a href="#visitanos">Visítanos</a>
+    <a href="#reservar" class="nav__mobile-cta">Reservar mesa</a>
+  </div>
+</header>
+
+<!-- ══════════════════════ HERO ══════════════════════ -->
+<section class="hero" id="inicio">
+  <img src="assets/img/hero-barra.jpg" alt="" class="hero__bg" aria-hidden="true">
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="hero__content">
+    <img src="assets/img/logo-la-santa.png" alt="La Santa" class="hero__logo reveal">
+    <p class="hero__kicker reveal">Bar · Cocina · Buena noche</p>
+    <h1 class="hero__title reveal">Un lugar donde<br><em>pecar está permitido</em></h1>
+    <p class="hero__text reveal">Coctelería de autor, pizzas, burgers y sushi en el corazón de
+      Puerto Montt. Reserva tu mesa en menos de un minuto.</p>
+
+    <div class="hero__actions reveal">
+      <a href="#reservar" class="btn btn--gold" data-abrir-tab="diaria">Reservar mesa</a>
+      <a href="#carta" class="btn btn--ghost">Ver la carta</a>
+    </div>
+
+    <ul class="hero__badges reveal">
+      <li>✦ Confirmación inmediata por correo</li>
+      <li>✦ Sushi libre <span data-buffet-dias>todos los jueves</span></li>
+      <li>✦ Beneficios de cumpleaños</li>
+    </ul>
+  </div>
+  <a href="#reservar" class="hero__scroll" aria-hidden="true">↓</a>
+</section>
+
+<!-- ══════════════════════ FRANJA ══════════════════════ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Santos Palitos Libres</span><span>✦</span><span>Coctelería de autor</span><span>✦</span>
+    <span>Cumpleaños con beneficios</span><span>✦</span><span>Música en vivo</span><span>✦</span>
+    <span>Santos Palitos Libres</span><span>✦</span><span>Coctelería de autor</span><span>✦</span>
+    <span>Cumpleaños con beneficios</span><span>✦</span><span>Música en vivo</span><span>✦</span>
+  </div>
+</div>
+
+<!-- ══════════════════════ RESERVAS ══════════════════════ -->
+<section class="section" id="reservar">
+  <div class="wrap">
+    <header class="section__head reveal">
+      <p class="eyebrow">Reservas</p>
+      <h2>Asegura tu mesa</h2>
+      <p class="lede">Elige el tipo de reserva, completa tus datos y recibe la confirmación
+        en tu correo al instante.</p>
+    </header>
+
+    <div class="reserva reveal">
+      <!-- Tabs -->
+      <div class="tabs" role="tablist" aria-label="Tipo de reserva">
+        <button class="tab is-active" type="button" role="tab" id="tab-diaria"  aria-selected="true"  aria-controls="formReserva" data-tab="diaria">
+          <span class="tab__ico">🍸</span> Mesa diaria
+        </button>
+        <button class="tab" type="button" role="tab" id="tab-buffet" aria-selected="false" aria-controls="formReserva" data-tab="buffet">
+          <span class="tab__ico">🍢</span> Santos Palitos Libres
+        </button>
+        <button class="tab" type="button" role="tab" id="tab-cumple" aria-selected="false" aria-controls="formReserva" data-tab="cumple">
+          <span class="tab__ico">🎂</span> Cumpleaños
+        </button>
+      </div>
+
+      <form class="form" id="formReserva" role="tabpanel" aria-labelledby="tab-diaria" novalidate>
+        <p class="form__nota" id="notaTipo"></p>
+
+        <div class="grid2">
+          <div class="field">
+            <label for="nombre">Nombre y apellido *</label>
+            <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="Camila Rojas" required>
+            <span class="error" data-error-for="nombre"></span>
+          </div>
+          <div class="field">
+            <label for="correo">Correo *</label>
+            <input type="email" id="correo" name="correo" autocomplete="email" placeholder="camila@correo.cl" required>
+            <span class="hint">Ahí te llega el detalle de tu reserva.</span>
+            <span class="error" data-error-for="correo"></span>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="field">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder="+56 9 1234 5678">
+            <span class="hint">Para avisarte si necesitamos coordinar algo.</span>
+            <span class="error" data-error-for="telefono"></span>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="field">
+            <label for="fecha">Fecha *</label>
+            <input type="date" id="fecha" name="fecha" required>
+            <span class="error" data-error-for="fecha"></span>
+          </div>
+          <div class="field" data-solo="diaria cumple">
+            <label for="hora">Hora *</label>
+            <input type="time" id="hora" name="hora" value="21:00">
+            <span class="hint" data-hora-ayuda></span>
+            <span class="error" data-error-for="hora"></span>
+          </div>
+          <div class="field" data-solo="buffet">
+            <label for="turno">Turno *</label>
+            <select id="turno" name="turno"></select>
+          </div>
+          <div class="field">
+            <label for="personas">Personas *</label>
+            <input type="number" id="personas" name="personas" min="1" max="30" value="2" required>
+            <span class="error" data-error-for="personas"></span>
+          </div>
+        </div>
+
+        <!-- Extras: mesa diaria -->
+        <div data-solo="diaria">
+          <fieldset class="checks checks--una">
+            <legend>Cortesía del día</legend>
+            <label class="check">
+              <input type="checkbox" id="cortesia" name="cortesia">
+              <span>Quiero solicitar la cortesía del día</span>
+            </label>
+          </fieldset>
+          <p class="nota-cortesia" id="notaCortesia">
+            Cambia cada semana. Se solicita <strong>hasta las 22:30</strong>.
+          </p>
+        </div>
+
+        <!-- Extras: sushi libre -->
+        <div data-solo="buffet">
+          <div class="grid2">
+            <div class="field">
+              <label for="ninos712">De ellos, niños 7 a 12 años</label>
+              <input type="number" id="ninos712" name="ninos712" min="0" value="0">
+              <span class="hint">Pagan $7.990.</span>
+            </div>
+            <div class="field">
+              <label for="ninos6">De ellos, niños hasta 6 años</label>
+              <input type="number" id="ninos6" name="ninos6" min="0" value="0">
+              <span class="hint">No pagan.</span>
+            </div>
+          </div>
+          <span class="error" data-error-for="ninos712"></span>
+
+          <div class="resumen" id="resumenBuffet" aria-live="polite">
+            <p class="resumen__titulo">Total estimado</p>
+            <ul class="resumen__lista"></ul>
+          </div>
+        </div>
+
+        <!-- Extras: cumpleaños -->
+        <div data-solo="cumple">
+          <div class="grid2">
+            <div class="field">
+              <label for="cumpleanero">¿Quién cumple años?</label>
+              <input type="text" id="cumpleanero" name="cumpleanero" placeholder="Nombre del cumpleañero/a">
+            </div>
+            <div class="field">
+              <label for="fechaCumple">Fecha real del cumpleaños</label>
+              <input type="date" id="fechaCumple" name="fechaCumple">
+              <span class="hint">Sirve para validar los beneficios.</span>
+            </div>
+          </div>
+
+          <div class="resumen" id="resumenBeneficios" aria-live="polite">
+            <p class="resumen__titulo">Beneficios que te corresponden</p>
+            <ul class="resumen__lista"></ul>
+          </div>
+
+          <fieldset class="checks">
+            <legend>Extras</legend>
+            <label class="check"><input type="checkbox" id="decoracion" name="decoracion"><span>Quiero decoración de cumpleaños</span></label>
+          </fieldset>
+        </div>
+
+        <div class="field">
+          <label for="comentarios">Comentarios</label>
+          <textarea id="comentarios" name="comentarios" rows="3" placeholder="Alergias, silla para bebé, llegamos un poco tarde, etc."></textarea>
+        </div>
+
+        <div class="form__foot">
+          <!-- Trampa anti-spam: invisible para personas, tentadora para robots.
+               Si viene con texto, el envío se descarta en silencio. -->
+          <div class="trampa" aria-hidden="true">
+            <label for="sitioWeb">No llenar este campo</label>
+            <input type="text" id="sitioWeb" name="sitioWeb" tabindex="-1" autocomplete="off">
+          </div>
+
+          <button type="submit" class="btn btn--gold btn--full" id="btnEnviar">
+            <span class="btn__txt">Enviar reserva</span>
+          </button>
+
+          <p class="aviso-canal" id="avisoCanal" role="status" hidden></p>
+
+          <div class="respaldo" id="respaldo" hidden>
+            <p class="respaldo__titulo">Dudas y consultas por nuestros canales oficiales</p>
+            <div class="canales">
+              <button type="button" class="btn btn--ghost btn--full" id="btnWhatsapp">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.5-.3.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.2.5.1.6 0l.9-1.1c.2-.2.4-.2.6-.1l2 1c.2.1.4.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+                WhatsApp
+              </button>
+              <button type="button" class="btn btn--ghost btn--full" id="btnInstagram">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2Zm0 5.1a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4Zm0 7.8a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2Zm6-8a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0Z"/></svg>
+                Instagram
+              </button>
+            </div>
+          </div>
+
+          <div class="copia" id="copiaManual" hidden>
+            <label for="copiaTexto">Copia este mensaje y pégalo en el chat de Instagram:</label>
+            <textarea id="copiaTexto" rows="7" readonly></textarea>
+          </div>
+
+          <p class="form__legal">Te llega un correo con el detalle de tu reserva. Te esperamos
+            hasta 30 minutos después de la hora reservada.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ LA CARTA ══════════════════════ -->
+<section class="section section--alt" id="carta">
+  <div class="wrap">
+    <header class="section__head reveal">
+      <p class="eyebrow">La carta</p>
+      <h2>Pecado tras pecado,<br><em>bocado tras bocado</em></h2>
+      <p class="lede">Acá no solo hay sushi. Coctelería de autor inspirada en los siete pecados
+        capitales, pizzas artesanales, burgers, sándwiches y tablas para compartir.</p>
+    </header>
+
+    <div class="cats">
+      <article class="cat reveal">
+        <span class="cat__ico">🍸</span>
+        <h3>Cócteles La Santa</h3>
+        <p>Los siete pecados capitales, uno por trago: Lujuria, Gula, Envidia, Ira, Soberbia,
+          Avaricia, Pereza… y el Fruto Prohibido.</p>
+        <span class="cat__desde">desde $5.500</span>
+      </article>
+
+      <article class="cat cat--destacada reveal">
+        <span class="cat__ico">⏳</span>
+        <h3>Happy Hour</h3>
+        <p>Coctelería y destilados a precio rebajado. Pisco sour, mojitos, gin, spritz y más.</p>
+        <span class="cat__desde">martes a sábado · 18:00 a 22:00 · desde $3.500</span>
+      </article>
+
+      <article class="cat reveal">
+        <span class="cat__ico">🍣</span>
+        <h3>Holy Signature</h3>
+        <p>Rolls de autor: Lujuria Crunch, Camarón Hereje, Pecado Amarillo, Salmón Redentor,
+          Infierno Roll y Santa Verde (veggie).</p>
+        <span class="cat__desde">formatos de 20, 30 y 40 cortes · desde $6.500</span>
+      </article>
+
+      <article class="cat reveal">
+        <span class="cat__ico">🍔</span>
+        <h3>Santa Burger XXVI</h3>
+        <p>La Pecadora, La Endemoniada, La Bendita y La Santa Negra. Doble smash y salsas
+          de la casa.</p>
+        <span class="cat__desde">desde $6.990</span>
+      </article>
+
+      <article class="cat reveal">
+        <span class="cat__ico">🍕</span>
+        <h3>Santa Pizza</h3>
+        <p>Artesanales de 32 cm con base de salsa pomodoro y mozzarella. Pepperoni, jamón,
+          vegetariana, mixta y pollo BBQ.</p>
+        <span class="cat__desde">desde $6.990</span>
+      </article>
+
+      <article class="cat reveal">
+        <span class="cat__ico">🍢</span>
+        <h3>Santa Gula</h3>
+        <p>Tablas para compartir: Pecado Capital (mar y tierra), La Condena, Infernal de Pollo
+          y las papas Lomo de La Santa.</p>
+        <span class="cat__desde">desde $12.990</span>
+      </article>
+
+      <article class="cat reveal">
+        <span class="cat__ico">🍟</span>
+        <h3>Santa Comida</h3>
+        <p>Sándwiches, burgers clásicas y para picotear: Papas La Santa, la pichanga, ceviche
+          y camarones al pil pil.</p>
+        <span class="cat__desde">desde $4.490</span>
+      </article>
+
+      <article class="cat reveal">
+        <span class="cat__ico">🍺</span>
+        <h3>Barra completa</h3>
+        <p>Cervezas, schop artesanal, whisky, pisco, gin, ron, vinos, coctelería de litro
+          y botellas para la mesa.</p>
+        <span class="cat__desde">desde $2.000</span>
+      </article>
+    </div>
+
+    <!-- Visor de la carta -->
+    <div class="visor reveal">
+      <div class="visor__head">
+        <div>
+          <h3>Carta completa</h3>
+          <p>Toca cualquier página para verla en grande.</p>
+        </div>
+        <a class="btn btn--ghost btn--sm" data-carta-pdf download>Descargar PDF</a>
+      </div>
+      <ul class="paginas" data-carta-paginas></ul>
+    </div>
+  </div>
+</section>
+
+<!-- Visor a pantalla completa -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Carta de La Santa" hidden>
+  <button class="lightbox__cerrar" id="lbCerrar" aria-label="Cerrar">✕</button>
+  <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" aria-label="Página anterior">‹</button>
+  <figure class="lightbox__fig">
+    <img id="lbImg" src="" alt="">
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+  <button class="lightbox__nav lightbox__nav--next" id="lbNext" aria-label="Página siguiente">›</button>
+</div>
+
+<!-- ══════════════════════ SANTOS PALITOS LIBRES ══════════════════════ -->
+<section class="section section--alt" id="palitos">
+  <div class="wrap">
+    <div class="split">
+      <div class="split__text reveal">
+        <p class="eyebrow">🍣 Sushi libre</p>
+        <h2>Santos <em>Palitos Libres</em></h2>
+        <p class="lede">Todo el sushi que puedas comer durante 2 horas. Y para partir fuerte,
+          los <strong>primeros 30 minutos son puros Rolls Premium</strong>.</p>
+
+        <ul class="lista">
+          <li><strong>Sushi ilimitado</strong> durante las 2 horas de tu turno</li>
+          <li>Los <strong>primeros 30 minutos</strong>, Rolls Premium</li>
+          <li><strong>Niños hasta 6 años no pagan</strong></li>
+          <li>Cupos limitados — se reserva sí o sí</li>
+        </ul>
+
+        <ul class="precios" data-buffet-precios></ul>
+
+        <a href="#reservar" class="btn btn--gold" data-abrir-tab="buffet">Reservar Sushi Libre</a>
+      </div>
+
+      <aside class="card card--turnos reveal">
+        <h3>Cómo funciona</h3>
+        <p class="card__dias">Días: <strong data-buffet-dias>Jueves a Sábado</strong></p>
+        <ul class="turnos" data-buffet-turnos></ul>
+        <ul class="minilista">
+          <li>Duración: 2 horas por turno</li>
+          <li>Primeros 30 minutos: Rolls Premium</li>
+          <li>Cupos limitados por turno</li>
+        </ul>
+        <p class="card__aviso" data-buffet-aviso></p>
+        <p class="card__dias" style="margin-top:14px">
+          Dudas y consultas por nuestros canales oficiales:
+          <a data-link="instagram" target="_blank" rel="noopener" class="link-oro">Instagram</a>
+          y
+          <a data-link="whatsapp" target="_blank" rel="noopener" class="link-oro">WhatsApp</a>.
+        </p>
+      </aside>
+    </div>
+
+    <div class="tira reveal">
+      <figure><img src="assets/img/sushi-1.jpg" alt="Mesa del buffet Santos Palitos Libres llena de rolls" loading="lazy"></figure>
+      <figure><img src="assets/img/sushi-2.jpg" alt="Bandeja de rolls recién servidos" loading="lazy"></figure>
+      <figure><img src="assets/img/sushi-3.jpg" alt="Clientes sirviéndose en el sushi libre" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CUMPLEAÑOS ══════════════════════ -->
+<section class="section" id="cumples">
+  <div class="wrap">
+    <header class="section__head reveal">
+      <p class="eyebrow">Celebraciones</p>
+      <h2>Cumple en La Santa</h2>
+      <p class="lede">Mientras más son, más te regalamos. Los beneficios se aplican solos
+        según cuántos vengan a la mesa — solo tienes que reservar.</p>
+    </header>
+
+    <div class="tramos">
+      <article class="tramo reveal">
+        <header class="tramo__head">
+          <span class="tramo__num">4</span>
+          <span class="tramo__label">personas</span>
+        </header>
+        <ul class="tramo__lista">
+          <li><strong>1 tabla</strong> de cortesía</li>
+          <li><strong>1 trago</strong> para el cumpleañero/a</li>
+        </ul>
+      </article>
+
+      <article class="tramo reveal">
+        <header class="tramo__head">
+          <span class="tramo__num">5–9</span>
+          <span class="tramo__label">personas</span>
+        </header>
+        <ul class="tramo__lista">
+          <li><strong>1 tabla</strong> de cortesía por cada 4 personas</li>
+          <li><strong>1 jarra de mojito</strong> para la mesa</li>
+        </ul>
+      </article>
+
+      <article class="tramo tramo--top reveal">
+        <span class="tramo__cinta">El mejor</span>
+        <header class="tramo__head">
+          <span class="tramo__num">10+</span>
+          <span class="tramo__label">personas</span>
+        </header>
+        <ul class="tramo__lista">
+          <li><strong>1 tabla</strong> de cortesía por cada 4 personas</li>
+          <li><strong>Happy Hour especial</strong> de cumpleaños toda la noche</li>
+          <li><strong>1 trago de regalo</strong> al cumpleañero/a cada 1 hora</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="deco-nota reveal">
+      <img src="assets/img/cumple-2.jpg" alt="Dos amigos celebrando con cocteles en una mesa de La Santa" loading="lazy">
+      <div class="deco-nota__texto">
+        <span class="deco-nota__ico">🎈</span>
+        <h3>¿Quieres decoración?</h3>
+        <p>Pídela al momento de reservar la mesa y La Santa se encarga del resto:
+          tú solo llegas y celebras.</p>
+      </div>
+    </div>
+
+    <div class="cta-box reveal">
+      <div>
+        <h3>¿Cumples pronto?</h3>
+        <p>Reserva con al menos 48 horas de anticipación para dejar todo listo.</p>
+      </div>
+      <a href="#reservar" class="btn btn--gold" data-abrir-tab="cumple">Reservar mi cumpleaños</a>
+    </div>
+
+    <p class="letra-chica reveal">Beneficios sujetos a reserva confirmada y verificación de la fecha
+      con documento de identidad. El Happy Hour especial requiere un mínimo de 10 personas
+      en la mesa durante la noche. No acumulables con otras promociones.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════ INSTAGRAM ══════════════════════ -->
+<section class="section section--alt" id="instagram">
+  <div class="wrap">
+    <header class="section__head reveal">
+      <p class="eyebrow">En vivo</p>
+      <h2>Lo último en Instagram</h2>
+      <p class="lede">Las noches, los eventos y los platos nuevos, directo desde nuestro feed.
+        Se actualiza solo cada vez que publicamos.</p>
+    </header>
+
+    <!-- El feed lo inyecta main.js cuando hay un ID configurado en config.js -->
+    <div class="ig-feed" data-ig-feed hidden></div>
+
+    <!-- Lo que se ve mientras el feed no esté configurado o si Behold falla -->
+    <div class="ig-fallback reveal" data-ig-fallback>
+      <span class="ig-fallback__ico">📸</span>
+      <h3>Míranos en Instagram</h3>
+      <p>Ahí publicamos los eventos, la carta nueva y cómo se vive La Santa cada noche.</p>
+      <a class="btn btn--gold" data-link="instagram" target="_blank" rel="noopener">
+        Ver el perfil
+      </a>
+    </div>
+
+    <div class="ig-pie reveal">
+      <a class="link-oro" data-link="instagram" target="_blank" rel="noopener" data-ig-usuario>@bar.lasantapm</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="lugar">
+  <div class="wrap">
+    <header class="section__head reveal">
+      <p class="eyebrow">El lugar</p>
+      <h2>Así se vive La Santa</h2>
+      <p class="lede">Luz baja, barra encendida y la cocina trabajando toda la noche.</p>
+    </header>
+
+    <div class="galeria reveal">
+      <figure class="galeria__item galeria__item--big">
+        <img src="assets/img/lugar-1.jpg" alt="Dos clientas con cócteles en el salón de La Santa" loading="lazy">
+      </figure>
+      <figure class="galeria__item">
+        <img src="assets/img/lugar-2.jpg" alt="Pareja compartiendo una tabla en La Santa" loading="lazy">
+      </figure>
+      <figure class="galeria__item">
+        <img src="assets/img/lugar-3.jpg" alt="Brindis con margaritas y alitas de pollo" loading="lazy">
+      </figure>
+      <figure class="galeria__item">
+        <img src="assets/img/lugar-4.jpg" alt="Clienta comiendo una Santa Burger" loading="lazy">
+      </figure>
+      <figure class="galeria__item">
+        <img src="assets/img/lugar-5.jpg" alt="Pareja en la barra de La Santa" loading="lazy">
+      </figure>
+      <figure class="galeria__item">
+        <img src="assets/img/lugar-6.jpg" alt="Grupo de amigas celebrando en La Santa" loading="lazy">
+      </figure>
+    </div>
+
+    <div class="social-invite reveal">
+      <p>Mira lo último en nuestras redes</p>
+      <div class="social-invite__btns">
+        <a class="btn btn--gold" data-link="instagram" target="_blank" rel="noopener">Síguenos en Instagram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ VISÍTANOS ══════════════════════ -->
+<section class="section section--alt" id="visitanos">
+  <div class="wrap">
+    <div class="split split--rev">
+      <div class="split__text reveal">
+        <p class="eyebrow">Visítanos</p>
+        <h2>Dónde y cuándo</h2>
+        <p class="dato"><strong>Dirección</strong><br><span data-direccion></span></p>
+        <p class="dato"><strong>Teléfono</strong><br><a data-link="tel" data-telefono></a></p>
+        <div class="acciones">
+          <a class="btn btn--gold" data-link="maps" target="_blank" rel="noopener">Cómo llegar</a>
+          <a class="btn btn--ghost" data-link="whatsapp" target="_blank" rel="noopener">Escríbenos</a>
+        </div>
+      </div>
+
+      <aside class="card reveal">
+        <h3>Horarios</h3>
+        <ul class="horarios" data-horarios></ul>
+        <p class="card__aviso">Cocina hasta 45 min antes del cierre.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ FOOTER ══════════════════════ -->
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <img src="assets/img/logo-la-santa.png" alt="La Santa" class="footer__logo">
+
+    <nav class="footer__social" aria-label="Redes sociales">
+      <a data-link="instagram" target="_blank" rel="noopener" aria-label="Instagram de La Santa">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2Zm0 5.1a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4Zm0 7.8a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2Zm6-8a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0Z"/></svg>
+        <span>Instagram</span>
+      </a>
+      <a data-link="tiktok" target="_blank" rel="noopener" aria-label="TikTok de La Santa" hidden>
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M16.5 2h-3v13.2a2.7 2.7 0 1 1-2.3-2.7v-3a5.7 5.7 0 1 0 5.3 5.7V9.4a6.9 6.9 0 0 0 4 1.3v-3a4 4 0 0 1-4-4Z"/></svg>
+        <span>TikTok</span>
+      </a>
+      <a data-link="whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp de La Santa">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.5-.3.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.2.5.1.6 0l.9-1.1c.2-.2.4-.2.6-.1l2 1c.2.1.4.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+    </nav>
+
+    <p class="footer__legal">
+      © <span data-anio></span> La Santa · Todos los derechos reservados.<br>
+      Bebe con responsabilidad. Prohibida la venta de alcohol a menores de 18 años.
+    </p>
+  </div>
+</footer>
+
+<!-- Barra fija móvil -->
+<div class="barra-movil">
+  <a href="#reservar" class="btn btn--gold btn--sm">Reservar mesa</a>
+  <a data-link="whatsapp" target="_blank" rel="noopener" class="btn btn--ghost btn--sm">WhatsApp</a>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
