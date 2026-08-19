@@ -19,7 +19,7 @@ window.LA_SANTA = {
      funcionando por WhatsApp / Instagram como antes.
      Instrucciones completas en apps-script/INSTRUCCIONES.md
   ----------------------------------------------------------- */
-  hojaUrl: "",
+  hojaUrl: "https://script.google.com/macros/s/AKfycbyEYDdZRhWXuQdjIMnM4HLVnC78sPdV6wFjvf-8NU2-BiiAZgiZDgZrRtK1ozFDiO8z/exec",
 
   /* --- Redes sociales --------------------------------------
      Deja "" en las que no tengan: el botón desaparece solo.
