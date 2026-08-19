@@ -5,7 +5,14 @@
    ============================================================ */
 
 /* --- Lo único que quizá quieras cambiar -------------------- */
-var CORREO_BAR  = "barlasantapmc@gmail.com"; // a dónde responde el cliente si contesta
+var CORREO_BAR  = "bar.lasanta.pm@gmail.com"; // a dónde responde el cliente si contesta
+
+/* ID de la hoja de cálculo.
+   - Si abriste este editor DESDE la hoja (Extensiones → Apps Script), déjalo "".
+   - Si lo abriste desde script.google.com, pega acá el ID de tu hoja. Está en su
+     URL, entre "/d/" y "/edit":
+     docs.google.com/spreadsheets/d/AQUI_VA_EL_ID/edit                        */
+var ID_HOJA = "";
 var NOMBRE_HOJA = "Reservas";                // pestaña donde se escriben las filas
 
 var COLUMNAS = [
@@ -52,7 +59,16 @@ function json(obj) {
 
 /* --- Escribir la fila -------------------------------------- */
 function guardarFila(d) {
-  var libro = SpreadsheetApp.getActiveSpreadsheet();
+  var libro = ID_HOJA
+    ? SpreadsheetApp.openById(ID_HOJA)
+    : SpreadsheetApp.getActiveSpreadsheet();
+
+  if (!libro) {
+    throw new Error(
+      "No encuentro la hoja de cálculo. Abre este editor desde la hoja " +
+      "(Extensiones → Apps Script), o pega el ID de la hoja en la variable ID_HOJA."
+    );
+  }
   var hoja = libro.getSheetByName(NOMBRE_HOJA);
 
   // La primera vez creamos la pestaña y los encabezados solos

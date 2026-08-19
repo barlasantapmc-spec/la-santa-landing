@@ -11,7 +11,7 @@ window.LA_SANTA = {
   ----------------------------------------------------------- */
   whatsapp: "56988996199",
   telefono: "+56 9 8899 6199",
-  correoBar: "barlasantapmc@gmail.com",
+  correoBar: "bar.lasanta.pm@gmail.com",
 
   /* --- Guardado de reservas en Google Sheets ----------------
      Pega acá la URL que te da Apps Script al publicar el script

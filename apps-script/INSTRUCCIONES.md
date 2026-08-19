@@ -12,7 +12,7 @@ No se envía aviso interno al bar: las reservas se revisan en la hoja.
 
 ## Paso 1 — Crear la hoja
 
-1. Entra a [sheets.google.com](https://sheets.google.com) **con la cuenta `barlasantapmc@gmail.com`**.
+1. Entra a [sheets.google.com](https://sheets.google.com) **con la cuenta `bar.lasanta.pm@gmail.com`**.
    Esto importa: los correos van a salir desde la cuenta que crea el script.
 2. Crea una hoja nueva y llámala **Reservas La Santa**.
 
@@ -33,7 +33,7 @@ Conviene comprobar que funciona antes de conectarlo al sitio.
 1. Arriba, en el desplegable de funciones, elige **`probar`**.
 2. Dale al botón **Ejecutar** (▶).
 3. La primera vez Google pide permisos:
-   - **Revisar permisos** → elige la cuenta `barlasantapmc@gmail.com`
+   - **Revisar permisos** → elige la cuenta `bar.lasanta.pm@gmail.com`
    - Aparece **"Google no ha verificado esta aplicación"**. Es normal: la aplicación
      eres tú mismo. Pincha en **Configuración avanzada** → **Ir a (nombre del proyecto)**
    - **Permitir**
@@ -51,7 +51,7 @@ Borra esa fila cuando termines.
 
    | Campo | Valor |
    |---|---|
-   | Ejecutar como | **Yo** (`barlasantapmc@gmail.com`) |
+   | Ejecutar como | **Yo** (`bar.lasanta.pm@gmail.com`) |
    | Quién tiene acceso | **Cualquier persona** |
 
    "Cualquier persona" suena riesgoso, pero es necesario: quien reserva en el sitio no
