@@ -1,3 +1,4 @@
-# Documentación interna: no tiene por qué servirse como parte del sitio
-/apps-script/*   /404.html   404
-/README.md       /404.html   404
+# Documentación interna: no tiene por qué servirse como parte del sitio.
+# El "!" fuerza la regla: sin él, Netlify sirve el archivo real y la ignora.
+/apps-script/*   /404.html   404!
+/README.md       /404.html   404!
