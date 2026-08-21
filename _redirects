@@ -2,3 +2,6 @@
 # El "!" fuerza la regla: sin él, Netlify sirve el archivo real y la ignora.
 /apps-script/*   /404.html   404!
 /README.md       /404.html   404!
+
+# Atajo del QR de las mesas
+/carta   /carta.html   200
