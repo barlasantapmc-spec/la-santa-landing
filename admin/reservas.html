@@ -68,6 +68,8 @@
   input:checked + .pista::after{transform:translateX(28px)}
   input:focus-visible + .pista{box-shadow:0 0 0 3px rgba(201,162,74,.35)}
 
+  .pendiente{margin:18px 0 0;padding:12px 15px;border-radius:10px;font-size:.88rem;
+       background:rgba(201,162,74,.12);color:var(--oro-claro);line-height:1.5}
   .msg{margin-top:18px;padding:13px 16px;border-radius:10px;font-size:.92rem;line-height:1.5}
   .msg.ok{background:rgba(63,166,107,.12);color:#8FD3AC}
   .msg.error{background:rgba(196,86,74,.12);color:#E89A90}
@@ -116,6 +118,7 @@
     <textarea id="mensaje" maxlength="500"
       placeholder="Por ahora no estamos recibiendo reservas online…"></textarea>
 
+    <p class="pendiente" id="pendiente" hidden>⚠️ Cambios sin guardar — pulsa el botón para aplicarlos.</p>
     <button class="btn" type="submit" id="btnGuardar">Guardar cambios</button>
     <button class="btn btn--sec" type="button" id="btnSalir">Cerrar sesión</button>
     <div class="msg" id="msgPanel" hidden></div>
@@ -150,15 +153,33 @@
     }).then(function (r) { return r.json(); });
   }
 
-  function pintar(res) {
-    var on = res.reservas_activas;
+  var guardado = { activas: true, mensaje: "" };
+
+  /* Dibuja el cartel según el interruptor, no según lo guardado.
+     Si no coinciden, lo decimos claramente: el error más fácil de
+     cometer es mover el interruptor y salirse sin guardar. */
+  function refrescar() {
+    var on = $("#activas").checked;
+    var pendiente = (on !== guardado.activas) ||
+                    ($("#mensaje").value.trim() !== guardado.mensaje.trim());
+
     $("#estado").className = "estado " + (on ? "abierto" : "pausado");
     $("#estadoTexto").textContent = on ? "Reservas ABIERTAS" : "Reservas PAUSADAS";
     $("#estadoDetalle").textContent = on
       ? "El formulario del sitio está recibiendo reservas."
       : "El formulario está oculto y el servidor rechaza envíos.";
-    $("#activas").checked = on;
-    $("#mensaje").value = res.mensaje_cierre || "";
+
+    $("#pendiente").hidden = !pendiente;
+    $("#btnGuardar").textContent = pendiente ? "Guardar cambios" : "Sin cambios por guardar";
+    $("#btnGuardar").disabled = !pendiente;
+  }
+
+  function pintar(res) {
+    guardado.activas = res.reservas_activas;
+    guardado.mensaje = res.mensaje_cierre || "";
+    $("#activas").checked = res.reservas_activas;
+    $("#mensaje").value = guardado.mensaje;
+    refrescar();
   }
 
   formClave.addEventListener("submit", function (e) {
@@ -202,6 +223,9 @@
       .catch(function (err) { aviso($("#msgPanel"), err.message, "error"); })
       .then(function () { btn.disabled = false; btn.textContent = "Guardar cambios"; });
   });
+
+  $("#activas").addEventListener("change", refrescar);
+  $("#mensaje").addEventListener("input", refrescar);
 
   $("#btnSalir").addEventListener("click", function () {
     clave = "";
