@@ -428,6 +428,33 @@
   pintarResumen();
   pintarBuffet();
 
+  /* ---------- 3d. ¿Están abiertas las reservas? ----------
+     El administrador puede pausarlas desde /admin/reservas.
+     Si la consulta falla, dejamos el formulario visible a
+     propósito: el servidor igual rechaza lo que no corresponda,
+     así que un corte de red no nos cuesta una reserva.      */
+  var cajaReserva = $("#cajaReserva");
+  var cajaCerrada = $("#reservasCerradas");
+
+  function mostrarCerrado(mensaje) {
+    if (!cajaCerrada || !cajaReserva) return;
+    $("#cerradoMensaje").textContent = mensaje;
+    cajaCerrada.hidden = false;
+    cajaCerrada.classList.add("is-visible");
+    cajaReserva.hidden = true;
+  }
+
+  if (C.hojaUrl) {
+    fetch(C.hojaUrl + "?estado=1")
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (res && res.ok && res.reservas_activas === false) {
+          mostrarCerrado(res.mensaje_cierre);
+        }
+      })
+      .catch(function () { /* sin red: el formulario sigue visible */ });
+  }
+
   /* ---------- 4. Fecha mínima = hoy ---------- */
   function hoyISO() {
     var d = new Date();
@@ -693,8 +720,10 @@
     })
       .then(function (r) { return r.json(); })
       .then(function (res) {
-        if (!res || !res.ok) throw new Error(res && res.error ? res.error : "sin respuesta");
         cargando(false);
+        // Pausaron las reservas mientras esta página estaba abierta
+        if (res && res.cerrado) { mostrarCerrado(res.error); return; }
+        if (!res || !res.ok) throw new Error(res && res.error ? res.error : "sin respuesta");
         exito();
       })
       .catch(function () {

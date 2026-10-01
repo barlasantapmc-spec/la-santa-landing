@@ -114,7 +114,18 @@
         en tu correo al instante.</p>
     </header>
 
-    <div class="reserva reveal">
+    <!-- Se muestra solo si el administrador pausó las reservas -->
+    <div class="cerrado reveal" id="reservasCerradas" hidden>
+      <span class="cerrado__ico">🌙</span>
+      <h3>Reservas en pausa</h3>
+      <p id="cerradoMensaje"></p>
+      <div class="cerrado__btns">
+        <a class="btn btn--gold" data-link="whatsapp" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+        <a class="btn btn--ghost" data-link="instagram" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+
+    <div class="reserva reveal" id="cajaReserva">
       <!-- Tabs -->
       <div class="tabs" role="tablist" aria-label="Tipo de reserva">
         <button class="tab is-active" type="button" role="tab" id="tab-diaria"  aria-selected="true"  aria-controls="formReserva" data-tab="diaria">

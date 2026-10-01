@@ -15,6 +15,50 @@ var CORREO_BAR  = "bar.lasanta.pm@gmail.com"; // a dónde responde el cliente si
 var ID_HOJA = "";
 var NOMBRE_HOJA = "Reservas";                // pestaña donde se escriben las filas
 
+/* --- Ajustes del servidor ----------------------------------
+   Se guardan en las Propiedades del Script: sobreviven a cualquier
+   reinicio y solo cambian cuando el administrador los cambia.
+
+   La contraseña del panel NO va en este archivo. Se configura en:
+   Configuración del proyecto → Propiedades de la secuencia de comandos
+   → Agregar propiedad → nombre: CLAVE_ADMIN
+----------------------------------------------------------- */
+var CLAVE_PROP   = "CLAVE_ADMIN";
+var MAX_INTENTOS = 5;          // intentos fallidos antes de bloquear
+var BLOQUEO_MIN  = 15;         // minutos de bloqueo
+
+var AJUSTES_DEFECTO = {
+  reservas_activas: true,
+  mensaje_cierre: "Por ahora no estamos recibiendo reservas online. " +
+                  "Escríbenos por WhatsApp o Instagram @bar.lasantapm y " +
+                  "te ayudamos a coordinar tu mesa."
+};
+
+function propiedades() { return PropertiesService.getScriptProperties(); }
+
+function leerAjustes() {
+  var p = propiedades();
+  var activas = p.getProperty("reservas_activas");
+  var mensaje = p.getProperty("mensaje_cierre");
+  return {
+    reservas_activas: activas === null ? AJUSTES_DEFECTO.reservas_activas
+                                       : activas === "true",
+    mensaje_cierre: mensaje || AJUSTES_DEFECTO.mensaje_cierre
+  };
+}
+
+function guardarAjustes(d) {
+  var p = propiedades();
+  if (typeof d.reservas_activas === "boolean") {
+    p.setProperty("reservas_activas", String(d.reservas_activas));
+  }
+  if (typeof d.mensaje_cierre === "string" && d.mensaje_cierre.trim()) {
+    p.setProperty("mensaje_cierre", d.mensaje_cierre.trim().slice(0, 500));
+  }
+  p.setProperty("ultimo_cambio", new Date().toISOString());
+  return leerAjustes();
+}
+
 var COLUMNAS = [
   "Recibida", "Tipo", "Fecha", "Hora", "Personas",
   "Nombre", "Correo", "Teléfono",
@@ -22,10 +66,69 @@ var COLUMNAS = [
   "Detalle", "Total estimado", "Comentarios"
 ];
 
+/* --- Seguridad del panel -----------------------------------
+   La contraseña vive en las Propiedades del Script, nunca en el
+   código. Se compara recorriendo la cadena completa para no
+   filtrar por tiempo cuántos caracteres coincidieron.
+----------------------------------------------------------- */
+function claveValida(enviada) {
+  var real = propiedades().getProperty(CLAVE_PROP);
+  if (!real) return false;                 // sin clave configurada, nadie entra
+  var a = String(enviada || ""), b = String(real);
+  if (a.length !== b.length) return false;
+  var dif = 0;
+  for (var i = 0; i < b.length; i++) dif |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return dif === 0;
+}
+
+function estaBloqueado() {
+  var hasta = propiedades().getProperty("bloqueo_hasta");
+  return hasta && new Date(hasta) > new Date();
+}
+
+function registrarFallo() {
+  var p = propiedades();
+  var n = (parseInt(p.getProperty("intentos_fallidos"), 10) || 0) + 1;
+  p.setProperty("intentos_fallidos", String(n));
+  if (n >= MAX_INTENTOS) {
+    var hasta = new Date(Date.now() + BLOQUEO_MIN * 60000);
+    p.setProperty("bloqueo_hasta", hasta.toISOString());
+    p.setProperty("intentos_fallidos", "0");
+  }
+}
+
+function limpiarFallos() {
+  propiedades().deleteProperty("intentos_fallidos");
+  propiedades().deleteProperty("bloqueo_hasta");
+}
+
+function manejarAdmin(d) {
+  if (estaBloqueado()) {
+    return json({ ok: false, error: "Demasiados intentos fallidos. " +
+                  "Espera " + BLOQUEO_MIN + " minutos e inténtalo de nuevo." });
+  }
+  if (!claveValida(d.clave)) {
+    registrarFallo();
+    return json({ ok: false, error: "Contraseña incorrecta." });
+  }
+  limpiarFallos();
+
+  var a = (d.accion === "guardar") ? guardarAjustes(d) : leerAjustes();
+  return json({
+    ok: true,
+    reservas_activas: a.reservas_activas,
+    mensaje_cierre: a.mensaje_cierre,
+    ultimo_cambio: propiedades().getProperty("ultimo_cambio") || null
+  });
+}
+
 /* --- Punto de entrada: el sitio hace POST acá -------------- */
 function doPost(e) {
   try {
     var d = JSON.parse(e.postData.contents);
+
+    // Peticiones del panel de administración
+    if (d.accion) return manejarAdmin(d);
 
     // Trampa anti-spam: si viene llena, es un robot. Respondemos ok
     // para que no reintente, pero no guardamos nada.
@@ -33,6 +136,14 @@ function doPost(e) {
 
     if (!d.nombre || !d.correo) {
       return json({ ok: false, error: "Faltan datos obligatorios" });
+    }
+
+    /* Puerta del servidor: se revisa ANTES de guardar o enviar nada.
+       Protege de quien tenía la página abierta desde antes de pausar,
+       y de cualquiera que envíe datos saltándose el formulario.      */
+    var ajustes = leerAjustes();
+    if (!ajustes.reservas_activas) {
+      return json({ ok: false, cerrado: true, error: ajustes.mensaje_cierre });
     }
 
     guardarFila(d);
@@ -46,8 +157,15 @@ function doPost(e) {
   }
 }
 
-/* Permite abrir la URL en el navegador para comprobar que está viva */
-function doGet() {
+/* Estado público: lo consulta la página de reservas al cargar.
+   No lleva contraseña porque solo expone si se puede reservar. */
+function doGet(e) {
+  var p = (e && e.parameter) || {};
+  if (p.estado) {
+    var a = leerAjustes();
+    return json({ ok: true, reservas_activas: a.reservas_activas,
+                  mensaje_cierre: a.mensaje_cierre });
+  }
   return json({ ok: true, mensaje: "Reservas de La Santa en línea" });
 }
 

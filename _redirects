@@ -5,3 +5,6 @@
 
 # Atajo del QR de las mesas
 /carta   /carta.html   200
+
+# Panel de administración
+/admin/reservas   /admin/reservas.html   200

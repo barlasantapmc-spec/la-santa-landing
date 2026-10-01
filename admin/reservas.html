@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel de reservas · La Santa</title>
+<!-- Fuera de buscadores: es una página interna -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/assets/img/logo-la-santa.png">
+<style>
+  :root{
+    --carbon:#0B0A09; --carbon-2:#131110; --linea:rgba(201,162,74,.22);
+    --crema:#F4EDE1; --gris:#A79E92; --oro:#C9A24A; --oro-claro:#E6CB8B;
+    --verde:#3FA66B; --rojo:#C4564A;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;background:var(--carbon);color:var(--crema);
+       font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+       padding:24px 16px calc(24px + env(safe-area-inset-bottom,0px));
+       display:flex;align-items:flex-start;justify-content:center}
+  .caja{width:100%;max-width:520px}
+  .logo{display:block;margin:0 auto 22px;height:54px;width:auto}
+  .tarjeta{background:linear-gradient(180deg,var(--carbon-2),var(--carbon));
+           border:1px solid var(--linea);border-radius:16px;padding:26px 22px}
+  h1{margin:0 0 4px;font-size:1.35rem;font-weight:500;color:var(--oro-claro)}
+  .sub{margin:0 0 22px;color:var(--gris);font-size:.9rem;line-height:1.5}
+  label{display:block;margin:0 0 8px;font-size:.78rem;letter-spacing:.12em;
+        text-transform:uppercase;color:var(--gris)}
+  input[type=password],textarea{width:100%;padding:14px 16px;border-radius:10px;
+      border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);
+      color:var(--crema);font:inherit;font-size:1rem}
+  input:focus,textarea:focus{outline:none;border-color:var(--oro);
+      box-shadow:0 0 0 3px rgba(201,162,74,.15)}
+  textarea{min-height:120px;resize:vertical;line-height:1.55}
+  .btn{display:block;width:100%;margin-top:18px;padding:16px;border:0;border-radius:100px;
+       font:inherit;font-size:1rem;font-weight:600;cursor:pointer;
+       background:linear-gradient(135deg,var(--oro-claro),var(--oro));color:#140F06}
+  .btn:disabled{opacity:.55;cursor:default}
+  .btn--sec{background:none;border:1px solid var(--linea);color:var(--gris);font-weight:400}
+
+  /* Estado actual, bien visible */
+  .estado{display:flex;align-items:center;gap:14px;padding:18px;border-radius:12px;
+          margin-bottom:24px;border:1px solid}
+  .estado.abierto{background:rgba(63,166,107,.1);border-color:rgba(63,166,107,.45)}
+  .estado.pausado{background:rgba(196,86,74,.1);border-color:rgba(196,86,74,.45)}
+  .punto{width:14px;height:14px;border-radius:50%;flex:0 0 auto}
+  .abierto .punto{background:var(--verde);box-shadow:0 0 0 5px rgba(63,166,107,.2)}
+  .pausado .punto{background:var(--rojo);box-shadow:0 0 0 5px rgba(196,86,74,.2)}
+  .estado b{display:block;font-size:1.05rem;letter-spacing:.04em}
+  .abierto b{color:var(--verde)} .pausado b{color:var(--rojo)}
+  .estado span{font-size:.84rem;color:var(--gris)}
+
+  /* Interruptor grande */
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;
+          padding:18px;border:1px solid var(--linea);border-radius:12px;cursor:pointer;
+          background:rgba(255,255,255,.02)}
+  /* El interruptor es un <label>, así que hay que anular la regla de arriba */
+  .switch{text-transform:none;letter-spacing:normal;color:var(--crema);margin-bottom:22px}
+  .switch p{margin:0;font-size:.95rem;text-transform:none;letter-spacing:normal}
+  .switch small{display:block;color:var(--gris);font-size:.82rem;margin-top:3px;
+                text-transform:none;letter-spacing:normal}
+  .pista{position:relative;width:62px;height:34px;border-radius:100px;flex:0 0 auto;
+         background:rgba(196,86,74,.5);transition:background .22s}
+  .pista::after{content:"";position:absolute;top:4px;left:4px;width:26px;height:26px;
+         border-radius:50%;background:#fff;transition:transform .22s}
+  input[type=checkbox]{position:absolute;opacity:0;pointer-events:none}
+  input:checked + .pista{background:rgba(63,166,107,.75)}
+  input:checked + .pista::after{transform:translateX(28px)}
+  input:focus-visible + .pista{box-shadow:0 0 0 3px rgba(201,162,74,.35)}
+
+  .msg{margin-top:18px;padding:13px 16px;border-radius:10px;font-size:.92rem;line-height:1.5}
+  .msg.ok{background:rgba(63,166,107,.12);color:#8FD3AC}
+  .msg.error{background:rgba(196,86,74,.12);color:#E89A90}
+  .pie{margin-top:18px;text-align:center;font-size:.8rem;color:#6C645C}
+  .pie a{color:var(--gris)}
+  [hidden]{display:none !important}
+</style>
+</head>
+<body>
+<div class="caja">
+  <img src="/assets/img/logo-la-santa.png" alt="La Santa" class="logo">
+
+  <!-- Pantalla 1: contraseña -->
+  <form class="tarjeta" id="formClave">
+    <h1>Panel de reservas</h1>
+    <p class="sub">Ingresa la contraseña para administrar el estado de las reservas.</p>
+    <label for="clave">Contraseña</label>
+    <input type="password" id="clave" autocomplete="current-password" required>
+    <button class="btn" type="submit" id="btnEntrar">Entrar</button>
+    <div class="msg error" id="msgClave" hidden></div>
+  </form>
+
+  <!-- Pantalla 2: control -->
+  <form class="tarjeta" id="formPanel" hidden>
+    <h1>Estado de las reservas</h1>
+    <p class="sub">Los cambios se aplican de inmediato en barlasanta.cl</p>
+
+    <div class="estado" id="estado">
+      <span class="punto"></span>
+      <div>
+        <b id="estadoTexto">—</b>
+        <span id="estadoDetalle"></span>
+      </div>
+    </div>
+
+    <label class="switch" for="activas">
+      <div>
+        <p>Recibir reservas online</p>
+        <small>Apágalo para cerrar el formulario del sitio</small>
+      </div>
+      <input type="checkbox" id="activas">
+      <span class="pista"></span>
+    </label>
+
+    <label for="mensaje">Mensaje que verán los clientes</label>
+    <textarea id="mensaje" maxlength="500"
+      placeholder="Por ahora no estamos recibiendo reservas online…"></textarea>
+
+    <button class="btn" type="submit" id="btnGuardar">Guardar cambios</button>
+    <button class="btn btn--sec" type="button" id="btnSalir">Cerrar sesión</button>
+    <div class="msg" id="msgPanel" hidden></div>
+  </form>
+
+  <p class="pie"><a href="/">← Volver al sitio</a></p>
+</div>
+
+<script src="/js/config.js"></script>
+<script>
+(function () {
+  "use strict";
+  var API = (window.LA_SANTA && window.LA_SANTA.hojaUrl) || "";
+  var $ = function (s) { return document.querySelector(s); };
+
+  var formClave = $("#formClave"), formPanel = $("#formPanel");
+  var clave = "";   // solo en memoria: no se guarda en el navegador
+
+  function aviso(el, texto, tipo) {
+    el.textContent = texto;
+    el.className = "msg " + (tipo || "");
+    el.hidden = !texto;
+  }
+
+  /* Habla con el Apps Script. text/plain evita el preflight de CORS,
+     que Apps Script no sabe responder. */
+  function pedir(datos) {
+    return fetch(API, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(datos)
+    }).then(function (r) { return r.json(); });
+  }
+
+  function pintar(res) {
+    var on = res.reservas_activas;
+    $("#estado").className = "estado " + (on ? "abierto" : "pausado");
+    $("#estadoTexto").textContent = on ? "Reservas ABIERTAS" : "Reservas PAUSADAS";
+    $("#estadoDetalle").textContent = on
+      ? "El formulario del sitio está recibiendo reservas."
+      : "El formulario está oculto y el servidor rechaza envíos.";
+    $("#activas").checked = on;
+    $("#mensaje").value = res.mensaje_cierre || "";
+  }
+
+  formClave.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!API) return aviso($("#msgClave"), "Falta configurar hojaUrl en js/config.js", "error");
+
+    var btn = $("#btnEntrar");
+    btn.disabled = true; btn.textContent = "Comprobando…";
+    aviso($("#msgClave"), "");
+
+    pedir({ accion: "estado", clave: $("#clave").value })
+      .then(function (res) {
+        if (!res.ok) throw new Error(res.error || "No se pudo entrar");
+        clave = $("#clave").value;
+        $("#clave").value = "";
+        formClave.hidden = true;
+        formPanel.hidden = false;
+        pintar(res);
+      })
+      .catch(function (err) { aviso($("#msgClave"), err.message, "error"); })
+      .then(function () { btn.disabled = false; btn.textContent = "Entrar"; });
+  });
+
+  formPanel.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var btn = $("#btnGuardar");
+    btn.disabled = true; btn.textContent = "Guardando…";
+    aviso($("#msgPanel"), "");
+
+    pedir({
+      accion: "guardar",
+      clave: clave,
+      reservas_activas: $("#activas").checked,
+      mensaje_cierre: $("#mensaje").value
+    })
+      .then(function (res) {
+        if (!res.ok) throw new Error(res.error || "No se pudo guardar");
+        pintar(res);
+        aviso($("#msgPanel"), "Guardado. Ya está aplicado en el sitio.", "ok");
+      })
+      .catch(function (err) { aviso($("#msgPanel"), err.message, "error"); })
+      .then(function () { btn.disabled = false; btn.textContent = "Guardar cambios"; });
+  });
+
+  $("#btnSalir").addEventListener("click", function () {
+    clave = "";
+    formPanel.hidden = true;
+    formClave.hidden = false;
+    aviso($("#msgPanel"), "");
+  });
+})();
+</script>
+</body>
+</html>

@@ -108,3 +108,52 @@ registro de cada envío y el detalle de los que fallaron.
 **Implementar → Administrar implementaciones**, editar la existente (ícono del lápiz) y
 elegir **Nueva versión**. Si en vez de eso creas una implementación nueva, la URL cambia
 y habría que actualizarla en `config.js`.
+
+---
+
+## Pausar las reservas (panel de administración)
+
+El panel está en **barlasanta.cl/admin/reservas**.
+
+### Configurar la contraseña (una sola vez)
+
+La contraseña **no está en el código**. Se guarda en las propiedades del script:
+
+1. En el editor de Apps Script: **Configuración del proyecto** (el engranaje, menú izquierdo)
+2. Baja hasta **Propiedades de la secuencia de comandos** → **Agregar propiedad**
+3. Propiedad: `CLAVE_ADMIN` · Valor: la contraseña que quieras
+4. **Guardar propiedades**
+
+> Mientras no exista esa propiedad, **nadie puede entrar al panel**: el script
+> rechaza cualquier contraseña. Es a propósito.
+
+Para cambiarla después, editas el valor en esa misma pantalla. No hace falta
+volver a implementar.
+
+### Cómo se usa
+
+| Acción | Resultado |
+|---|---|
+| Apagar el interruptor | El formulario desaparece del sitio y el servidor rechaza envíos |
+| Editar el mensaje | Es el texto que ven los clientes mientras está pausado |
+| Guardar cambios | Se aplica de inmediato, sin volver a publicar el sitio |
+
+El ajuste queda guardado en las propiedades del script: **no se pierde** aunque
+pase el tiempo o Google reinicie algo.
+
+### Las dos barreras
+
+1. **En la página**: al cargar, consulta el estado y oculta el formulario si está pausado.
+2. **En el servidor**: `doPost` revisa el ajuste **antes** de guardar o enviar correos.
+
+La segunda es la que importa. Protege de quien tenía la página abierta desde antes
+de que pausaras, y de cualquiera que intente enviar datos saltándose el formulario.
+
+Si la consulta del punto 1 falla (sin internet, Google caído), **el formulario se
+muestra igual**. Es deliberado: un corte de red no debe costarte una reserva, y la
+barrera del servidor sigue ahí de todos modos.
+
+### Protección contra intentos de adivinar la contraseña
+
+Tras **5 intentos fallidos**, el panel se bloquea **15 minutos**. Los valores están
+arriba de `Codigo.gs`, en `MAX_INTENTOS` y `BLOQUEO_MIN`.
