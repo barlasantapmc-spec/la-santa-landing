@@ -346,6 +346,52 @@
 
   aplicarTipo("diaria");
 
+  /* ---------- 3a. Sección de cumpleaños, dibujada desde el JSON ----------
+     Las tarjetas y los textos salen de content/sitio.json, para que el
+     administrador pueda cambiar los beneficios sin tocar el HTML.      */
+  var CUMPLE = C.cumpleanos || {};
+  var TRAMOS = CUMPLE.tramos || [];
+
+  function texto(sel, valor) {
+    $$(sel).forEach(function (el) { if (valor) el.textContent = valor; });
+  }
+
+  texto("[data-cumple-lede]", CUMPLE.lede);
+  texto("[data-cumple-legal]", CUMPLE.letraChica);
+  if (CUMPLE.decoracion) {
+    texto("[data-cumple-deco-titulo]", CUMPLE.decoracion.titulo);
+    texto("[data-cumple-deco-texto]", CUMPLE.decoracion.texto);
+  }
+  if (CUMPLE.cta) {
+    texto("[data-cumple-cta-titulo]", CUMPLE.cta.titulo);
+    texto("[data-cumple-cta-texto]", CUMPLE.cta.texto);
+    texto("[data-cumple-cta-boton]", CUMPLE.cta.boton);
+  }
+
+  var cajaTramos = $("[data-cumple-tramos]");
+  if (cajaTramos && TRAMOS.length) {
+    cajaTramos.innerHTML = TRAMOS.map(function (t) {
+      var cinta = t.destacado && t.cinta
+        ? '<span class="tramo__cinta">' + escapar(t.cinta) + "</span>" : "";
+      var items = (t.beneficios || []).map(function (b) {
+        return "<li>" + escapar(b) + "</li>";
+      }).join("");
+      return '<article class="tramo reveal' + (t.destacado ? " tramo--top" : "") + '">' +
+        cinta +
+        '<header class="tramo__head">' +
+          '<span class="tramo__num">' + escapar(t.titulo) + "</span>" +
+          '<span class="tramo__label">personas</span>' +
+        "</header>" +
+        '<ul class="tramo__lista">' + items + "</ul>" +
+      "</article>";
+    }).join("");
+  }
+
+  function escapar(x) {
+    return String(x == null ? "" : x)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
   /* ---------- 3b. Beneficios de cumpleaños por tamaño de grupo ----------
      4        → 1 tabla + 1 trago para el cumpleañero/a
      5 a 9    → 1 tabla cada 4 personas + 1 jarra de mojito
@@ -353,20 +399,26 @@
                 + 1 trago de regalo al cumpleañero/a cada 1 hora
   --------------------------------------------------------------------- */
   function beneficiosPara(n) {
-    if (!n || n < 4) return [];
+    if (!n) return [];
 
-    var tablas = Math.floor(n / 4);
-    var lista = [tablas === 1 ? "1 tabla de cortesía" : tablas + " tablas de cortesía"];
-
-    if (n === 4) {
-      lista.push("1 trago para el cumpleañero/a");
-    } else if (n <= 9) {
-      lista.push("1 jarra de mojito para la mesa");
-    } else {
-      lista.push("Happy Hour especial de cumpleaños toda la noche");
-      lista.push("1 trago de regalo al cumpleañero/a cada 1 hora");
+    // Buscamos el tramo del JSON que corresponde a este número de personas
+    var tramo = null;
+    for (var i = 0; i < TRAMOS.length; i++) {
+      var t = TRAMOS[i];
+      if (n >= t.desde && (t.hasta == null || n <= t.hasta)) { tramo = t; break; }
     }
-    return lista;
+    if (!tramo) return [];
+
+    /* "por cada 4 personas" se convierte en la cantidad real; el resto
+       de los beneficios se copia tal cual viene del JSON.            */
+    return (tramo.beneficios || []).map(function (b) {
+      var m = b.match(/^(\d+)\s+(.+?)\s+por cada\s+(\d+)\s+personas$/i);
+      if (!m) return b;
+      var cuantos = Math.floor(n / parseInt(m[3], 10)) * parseInt(m[1], 10);
+      var cosa = m[2];
+      if (cuantos !== 1) cosa = cosa.replace(/^tabla\b/, "tablas");
+      return cuantos + " " + cosa;
+    });
   }
 
   var resumen = $("#resumenBeneficios");

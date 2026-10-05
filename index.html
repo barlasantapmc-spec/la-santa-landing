@@ -450,68 +450,29 @@
     <header class="section__head reveal">
       <p class="eyebrow">Celebraciones</p>
       <h2>Cumple en La Santa</h2>
-      <p class="lede">Mientras más son, más te regalamos. Los beneficios se aplican solos
-        según cuántos vengan a la mesa — solo tienes que reservar.</p>
+      <p class="lede" data-cumple-lede></p>
     </header>
 
-    <div class="tramos">
-      <article class="tramo reveal">
-        <header class="tramo__head">
-          <span class="tramo__num">4</span>
-          <span class="tramo__label">personas</span>
-        </header>
-        <ul class="tramo__lista">
-          <li><strong>1 tabla</strong> de cortesía</li>
-          <li><strong>1 trago</strong> para el cumpleañero/a</li>
-        </ul>
-      </article>
-
-      <article class="tramo reveal">
-        <header class="tramo__head">
-          <span class="tramo__num">5–9</span>
-          <span class="tramo__label">personas</span>
-        </header>
-        <ul class="tramo__lista">
-          <li><strong>1 tabla</strong> de cortesía por cada 4 personas</li>
-          <li><strong>1 jarra de mojito</strong> para la mesa</li>
-        </ul>
-      </article>
-
-      <article class="tramo tramo--top reveal">
-        <span class="tramo__cinta">El mejor</span>
-        <header class="tramo__head">
-          <span class="tramo__num">10+</span>
-          <span class="tramo__label">personas</span>
-        </header>
-        <ul class="tramo__lista">
-          <li><strong>1 tabla</strong> de cortesía por cada 4 personas</li>
-          <li><strong>Happy Hour especial</strong> de cumpleaños toda la noche</li>
-          <li><strong>1 trago de regalo</strong> al cumpleañero/a cada 1 hora</li>
-        </ul>
-      </article>
-    </div>
+    <div class="tramos" data-cumple-tramos></div>
 
     <div class="deco-nota reveal">
       <img src="assets/img/cumple-2.jpg" alt="Dos amigos celebrando con cocteles en una mesa de La Santa" loading="lazy">
       <div class="deco-nota__texto">
         <span class="deco-nota__ico">🎈</span>
-        <h3>¿Quieres decoración?</h3>
-        <p>Pídela al momento de reservar la mesa y La Santa se encarga del resto:
-          tú solo llegas y celebras.</p>
+        <h3 data-cumple-deco-titulo></h3>
+        <p data-cumple-deco-texto></p>
       </div>
     </div>
 
     <div class="cta-box reveal">
       <div>
-        <h3>¿Cumples pronto?</h3>
-        <p>Reserva con al menos 48 horas de anticipación para dejar todo listo.</p>
+        <h3 data-cumple-cta-titulo></h3>
+        <p data-cumple-cta-texto></p>
       </div>
-      <a href="#reservar" class="btn btn--gold" data-abrir-tab="cumple">Reservar mi cumpleaños</a>
+      <a href="#reservar" class="btn btn--gold" data-abrir-tab="cumple"><span data-cumple-cta-boton></span></a>
     </div>
 
-    <p class="letra-chica reveal">Beneficios sujetos a reserva confirmada y verificación de la fecha
-      con documento de identidad. El Happy Hour especial requiere un mínimo de 10 personas
-      en la mesa durante la noche. No acumulables con otras promociones.</p>
+    <p class="letra-chica reveal" data-cumple-legal></p>
   </div>
 </section>
 

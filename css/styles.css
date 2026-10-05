@@ -566,7 +566,8 @@ input[type="date"],input[type="time"]{color-scheme:dark}
   .footer{padding-bottom:56px}
   .split{grid-template-columns:1.05fr .95fr; gap:60px}
   .split--rev .split__text{order:2}
-  .tramos{grid-template-columns:repeat(3,1fr); gap:20px}
+  /* auto-fit: se acomoda solo si algún día agregan o quitan un tramo */
+  .tramos{grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:20px}
   .canales{grid-template-columns:1fr 1fr}
 
   .cats{grid-template-columns:repeat(4,1fr)}

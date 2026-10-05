@@ -74,5 +74,52 @@
     "horaMaxReserva": "22:00",
     "esperaHasta": "22:30",
     "topeCortesia": "22:30"
+  },
+  "cumpleanos": {
+    "lede": "Mientras más son, más te regalamos. Los beneficios se aplican solos según cuántos vengan a la mesa — solo tienes que reservar.",
+    "tramos": [
+      {
+        "desde": 4,
+        "hasta": 4,
+        "titulo": "4",
+        "destacado": false,
+        "beneficios": [
+          "1 tabla de cortesía",
+          "1 trago para el cumpleañero/a"
+        ]
+      },
+      {
+        "desde": 5,
+        "hasta": 9,
+        "titulo": "5–9",
+        "destacado": false,
+        "beneficios": [
+          "1 tabla de cortesía por cada 4 personas",
+          "1 jarra de mojito para la mesa"
+        ]
+      },
+      {
+        "desde": 10,
+        "hasta": null,
+        "titulo": "10+",
+        "destacado": true,
+        "cinta": "El mejor",
+        "beneficios": [
+          "1 tabla de cortesía por cada 4 personas",
+          "Happy Hour especial de cumpleaños toda la noche",
+          "1 trago de regalo al cumpleañero/a cada 1 hora"
+        ]
+      }
+    ],
+    "decoracion": {
+      "titulo": "¿Quieres decoración?",
+      "texto": "Pídela al momento de reservar la mesa y La Santa se encarga del resto: tú solo llegas y celebras."
+    },
+    "cta": {
+      "titulo": "¿Cumples pronto?",
+      "texto": "Reserva con al menos 48 horas de anticipación para dejar todo listo.",
+      "boton": "Reservar mi cumpleaños"
+    },
+    "letraChica": "Beneficios sujetos a reserva confirmada y verificación de la fecha con documento de identidad. El Happy Hour especial requiere un mínimo de 10 personas en la mesa durante la noche. No acumulables con otras promociones."
   }
 }
