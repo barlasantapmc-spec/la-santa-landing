@@ -1,0 +1,117 @@
+# Configuración del panel de administración (Pages CMS)
+# Define qué puede editar el administrador y con qué tipo de campo.
+# Lo que NO aparezca acá, no se puede tocar desde el panel.
+
+media:
+  - name: fotos
+    label: Fotos del local
+    input: assets/img
+    output: /assets/img
+    extensions: [jpg, jpeg, png, webp]
+  - name: carta
+    label: Páginas de la carta
+    input: assets/carta
+    output: /assets/carta
+    extensions: [jpg, jpeg, png, pdf]
+
+content:
+  # ───────────────── Contacto y datos del local ─────────────────
+  - name: contacto
+    label: Contacto y ubicación
+    type: file
+    path: content/sitio.json
+    format: json
+    fields:
+      - { name: whatsapp,  label: "WhatsApp (solo números, con 56)", type: string,
+          description: "Ejemplo: 56988996199 — sin +, sin espacios" }
+      - { name: telefono,  label: Teléfono visible, type: string,
+          description: "Como se muestra en el sitio. Ejemplo: +56 9 8899 6199" }
+      - { name: correoBar, label: Correo del bar, type: string }
+      - { name: instagram, label: URL de Instagram, type: string }
+      - { name: tiktok,    label: "URL de TikTok (déjalo vacío si no tienen)", type: string, required: false }
+      - { name: direccion, label: Dirección, type: string }
+      - { name: maps,      label: Enlace de Google Maps, type: string }
+
+      - name: horarios
+        label: Horarios de atención
+        type: object
+        list: true
+        fields:
+          - { name: dia,     label: Día o rango, type: string }
+          - { name: horas,   label: Horario, type: string, description: "O escribe: Cerrado" }
+          - { name: cerrado, label: Marcar como cerrado, type: boolean, required: false }
+
+      # ───────────────── Sushi libre ─────────────────
+      - name: buffet
+        label: Santos Palitos Libres
+        type: object
+        fields:
+          - { name: dias,          label: Días, type: string }
+          - { name: diaSemana,     label: "Día de la semana (0=domingo … 4=jueves … 6=sábado)", type: number }
+          - { name: turnos,        label: Turnos, type: string, list: true }
+          - { name: duracion,      label: Duración, type: string }
+          - { name: anticipoHoras, label: Horas de anticipación para reservar, type: number }
+          - name: precios
+            label: Precios
+            type: object
+            list: true
+            fields:
+              - { name: quien,  label: Quién, type: string }
+              - { name: valor,  label: "Precio como se muestra", type: string, description: "Ejemplo: $9.990 o Gratis" }
+              - { name: monto,  label: "Monto en números (0 si es gratis)", type: number,
+                  description: "Se usa para calcular el total. Debe coincidir con el precio de arriba." }
+
+      # ───────────────── Cumpleaños ─────────────────
+      - name: cumpleanos
+        label: Beneficios de cumpleaños
+        type: object
+        fields:
+          - { name: lede, label: Texto de introducción, type: text }
+          - name: tramos
+            label: Tramos por cantidad de personas
+            type: object
+            list: true
+            fields:
+              - { name: titulo,    label: "Título de la tarjeta", type: string, description: "Ejemplo: 4, 5–9, 10+" }
+              - { name: desde,     label: Desde (personas), type: number }
+              - { name: hasta,     label: "Hasta (vacío = sin tope)", type: number, required: false }
+              - { name: destacado, label: Destacar esta tarjeta, type: boolean, required: false }
+              - { name: cinta,     label: "Texto de la cinta (solo si está destacada)", type: string, required: false }
+              - { name: beneficios, label: Beneficios, type: string, list: true,
+                  description: "Si escribes '1 tabla de cortesía por cada 4 personas', el sitio calcula la cantidad real." }
+          - name: decoracion
+            label: Bloque de decoración
+            type: object
+            fields:
+              - { name: titulo, label: Título, type: string }
+              - { name: texto,  label: Texto, type: text }
+          - name: cta
+            label: Bloque de llamada a reservar
+            type: object
+            fields:
+              - { name: titulo, label: Título, type: string }
+              - { name: texto,  label: Texto, type: text }
+              - { name: boton,  label: Texto del botón, type: string }
+          - { name: letraChica, label: Condiciones (letra chica), type: text }
+
+      # ───────────────── Carta ─────────────────
+      - name: carta
+        label: La carta
+        type: object
+        fields:
+          - { name: pdf,     label: Ruta del PDF, type: string }
+          - { name: paginas, label: Nombre de cada página, type: string, list: true,
+              description: "El orden define cómo se muestran en el visor." }
+
+      # ───────────────── Reglas de reserva ─────────────────
+      - name: reservas
+        label: Reglas de reserva
+        type: object
+        fields:
+          - { name: minPersonas,    label: Mínimo de personas, type: number }
+          - { name: maxPersonas,    label: Máximo de personas, type: number }
+          - { name: horaApertura,   label: Hora de apertura, type: string }
+          - { name: horaCierre,     label: Hora de cierre, type: string }
+          - { name: horaMaxReserva, label: Última hora para reservar, type: string }
+          - { name: esperaHasta,    label: Se guarda la mesa hasta, type: string }
+          - { name: topeCortesia,   label: Tope para pedir la cortesía, type: string }
