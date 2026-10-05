@@ -1,0 +1,78 @@
+{
+  "whatsapp": "56988996199",
+  "telefono": "+56 9 8899 6199",
+  "correoBar": "bar.lasanta.pm@gmail.com",
+  "instagram": "https://www.instagram.com/bar.lasantapm/",
+  "tiktok": "",
+  "direccion": "Egaña 121, Puerto Montt",
+  "maps": "https://maps.app.goo.gl/2uDXzxT6aX11jRHz7",
+  "horarios": [
+    {
+      "dia": "Lunes a Jueves",
+      "horas": "18:00 – 02:00"
+    },
+    {
+      "dia": "Viernes",
+      "horas": "18:00 – 04:00"
+    },
+    {
+      "dia": "Sábado",
+      "horas": "19:00 – 04:00"
+    },
+    {
+      "dia": "Domingo",
+      "horas": "Cerrado",
+      "cerrado": true
+    }
+  ],
+  "buffet": {
+    "dias": "Todos los jueves",
+    "diaSemana": 4,
+    "turnos": [
+      "19:00 – 21:00"
+    ],
+    "duracion": "2 horas",
+    "anticipoHoras": 24,
+    "precios": [
+      {
+        "quien": "Adultos",
+        "valor": "$9.990",
+        "monto": 9990
+      },
+      {
+        "quien": "Niños de 7 a 12 años",
+        "valor": "$7.990",
+        "monto": 7990
+      },
+      {
+        "quien": "Niños hasta 6 años",
+        "valor": "Gratis",
+        "monto": 0
+      }
+    ]
+  },
+  "carta": {
+    "pdf": "assets/carta/carta-la-santa.pdf",
+    "paginas": [
+      "Cócteles La Santa",
+      "Happy Hour",
+      "Sin alcohol y cócteles",
+      "Destilados, vinos y clásicos",
+      "Cervezas, botellas y litros",
+      "Santa Pizza",
+      "Santa Comida",
+      "Santa Burger XXVI",
+      "Santa Gula",
+      "Holy Signature (sushi)"
+    ]
+  },
+  "reservas": {
+    "minPersonas": 1,
+    "maxPersonas": 30,
+    "horaApertura": "18:00",
+    "horaCierre": "02:00",
+    "horaMaxReserva": "22:00",
+    "esperaHasta": "22:30",
+    "topeCortesia": "22:30"
+  }
+}

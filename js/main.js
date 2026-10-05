@@ -5,7 +5,26 @@
 (function () {
   "use strict";
 
-  var C = window.LA_SANTA || {};
+  /* El contenido editable vive en content/sitio.json, que es lo que
+     modifica el panel de administración. js/config.js queda como
+     respaldo: si el archivo no carga, el sitio sigue funcionando con
+     los últimos valores conocidos en vez de quedar en blanco.        */
+  var RESPALDO = window.LA_SANTA || {};
+
+  fetch("/content/sitio.json", { cache: "no-cache" })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .catch(function () { return null; })
+    .then(function (datos) {
+      var C = RESPALDO;
+      if (datos) {
+        C = {};
+        Object.keys(RESPALDO).forEach(function (k) { C[k] = RESPALDO[k]; });
+        Object.keys(datos).forEach(function (k) { C[k] = datos[k]; });
+      }
+      iniciar(C);
+    });
+
+  function iniciar(C) {
   var $  = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
@@ -830,5 +849,6 @@
       });
     }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
     $$(".reveal").forEach(function (el) { io.observe(el); });
+  }
   }
 })();
